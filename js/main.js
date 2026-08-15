@@ -1,6 +1,6 @@
 /* ============ 状态 ============ */
 let lang = localStorage.getItem('lang') || 'zh';
-let theme = localStorage.getItem('theme') || 'dark';
+let theme = localStorage.getItem('theme') || 'light';
 document.documentElement.setAttribute('data-lang', lang);
 document.documentElement.setAttribute('data-theme', theme);
 
