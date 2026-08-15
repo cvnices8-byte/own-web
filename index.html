@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark" data-lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>邵锦波 Shao Jinbo · 数据科学 × AI Agent</title>
+  <meta name="description" content="邵锦波（Shao Jinbo）· 审计学本科 + 数据科学硕士在读，AI for Finance、可解释 AI、评测体系。个人简介与项目作品集。" />
+  <meta name="theme-color" content="#0A0E14" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧑‍💻</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+</head>
+<body>
+
+  <!-- 鼠标跟随光效：L1 氛围光晕 + L2 焦点高光 -->
+  <div id="cursor-glow" aria-hidden="true"></div>
+  <div id="cursor-dot" aria-hidden="true"></div>
+
+  <!-- 粒子背景 -->
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+  <!-- 暗色主题扫描线 -->
+  <div id="scanlines" aria-hidden="true"></div>
+
+  <!-- 滚动进度条 -->
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- 顶部导航 -->
+  <nav id="navbar">
+    <div class="nav-inner container">
+      <a class="nav-logo" href="#hero">
+        <span class="logo-sym">λ</span>
+        <span class="logo-text" data-i18n="nav.logo">邵锦波<span class="dim">.dev</span></span>
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="#about" data-i18n="nav.about">关于</a>
+        <a href="#education" data-i18n="nav.edu">教育</a>
+        <a href="#skills" data-i18n="nav.skills">技能</a>
+        <a href="#projects" data-i18n="nav.projects">项目</a>
+        <a href="#research" data-i18n="nav.research">研究</a>
+        <a href="#experience" data-i18n="nav.exp">经历</a>
+        <a href="#contact" data-i18n="nav.contact">联系</a>
+      </div>
+      <div class="nav-actions">
+        <button id="lang-toggle" class="nav-btn" title="Switch language" aria-label="Switch language">EN</button>
+        <button id="theme-toggle" class="nav-btn" title="Toggle theme" aria-label="Toggle theme">
+          <span class="theme-icon-dark">◐</span>
+        </button>
+        <button id="menu-toggle" class="nav-btn menu-btn" aria-label="Menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- ============ 1. Hero ============ -->
+    <section id="hero" class="section">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <p class="hero-terminal"><span class="term-green">$</span> whoami</p>
+          <h1 class="hero-name">
+            <span class="name-zh">邵锦波</span>
+            <span class="name-en">Shao Jinbo</span><span class="cursor-blink">_</span>
+          </h1>
+          <p class="hero-subtitle" data-i18n="hero.subtitle">审计学本科 + 数据科学硕士在读，让 AI 在财务与商业决策中更可解释、更可信、更可落地。</p>
+          <div class="hero-badges" id="hero-badges"></div>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#projects"><span data-i18n="hero.cta1">查看项目</span> →</a>
+            <a class="btn btn-ghost" href="#contact"><span data-i18n="hero.cta2">联系我</span></a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="character-wrap" id="character-wrap">
+            <div class="character-ring ring1"></div>
+            <div class="character-ring ring2"></div>
+            <img src="assets/character/ref-front-transparent.png" alt="邵锦波卡通形象" class="character-img" />
+          </div>
+        </div>
+      </div>
+      <a class="scroll-hint" href="#about" aria-label="Scroll down">
+        <span class="mouse"><span class="wheel"></span></span>
+      </a>
+    </section>
+
+    <!-- ============ 2. About ============ -->
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="section-title"><span class="sec-comment">//</span> <span data-i18n="about.title">关于我</span></h2>
+        <p class="section-lead" data-i18n="about.lead">财务 × 数据科学的复合背景，既懂业务、会建模，也能交付。</p>
+        <div class="grid-2" id="about-cards"></div>
+      </div>
+    </section>
+
+    <!-- ============ 3. Education ============ -->
+    <section id="education" class="section">
+      <div class="container">
+        <h2 class="section-title"><span class="sec-comment">##</span> <span data-i18n="edu.title">教育背景</span></h2>
+        <div class="timeline" id="edu-timeline"></div>
+      </div>
+    </section>
+
+    <!-- ============ 4. Skills ============ -->
+    <section id="skills" class="section">
+      <div class="container">
+        <h2 class="section-title"><span class="sec-comment">#</span> <span data-i18n="skills.title">技能</span></h2>
+        <div class="skills-layout">
+          <div class="radar-box">
+            <div id="radar-chart" class="chart" role="img" aria-label="技能雷达图"></div>
+          </div>
+          <div class="skills-cloud">
+            <div id="skills-groups"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. Projects ============ -->
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="section-title"><span class="sec-comment">&gt;</span> <span data-i18n="projects.title">项目</span></h2>
+        <p class="section-lead" data-i18n="projects.lead">4 个核心项目 + 1 个个人工具，覆盖财务 AI、临床 NLP、公共卫生与机器学习。</p>
+        <div id="projects-list"></div>
+      </div>
+    </section>
+
+    <!-- ============ 5.5 Research ============ -->
+    <section id="research" class="section">
+      <div class="container">
+        <h2 class="section-title"><span class="sec-comment">::</span> <span data-i18n="research.title">研究兴趣与学术产出</span></h2>
+        <div class="grid-3" id="research-grid"></div>
+      </div>
+    </section>
+
+    <!-- ============ 6. Experience ============ -->
+    <section id="experience" class="section">
+      <div class="container">
+        <h2 class="section-title"><span class="sec-comment">$</span> <span data-i18n="exp.title">实习经历</span></h2>
+        <div id="exp-list"></div>
+      </div>
+    </section>
+
+    <!-- ============ 7. Campus ============ -->
+    <section id="campus" class="section">
+      <div class="container">
+        <h2 class="section-title"><span class="sec-comment">+</span> <span data-i18n="campus.title">校园经历</span></h2>
+        <div class="grid-2" id="campus-list"></div>
+      </div>
+    </section>
+
+    <!-- ============ 8. Certificates ============ -->
+    <section id="certificates" class="section">
+      <div class="container">
+        <h2 class="section-title"><span class="sec-comment">*</span> <span data-i18n="cert.title">证书与荣誉</span></h2>
+        <div id="cert-list"></div>
+      </div>
+    </section>
+
+    <!-- ============ 9. Interests ============ -->
+    <section id="interests" class="section">
+      <div class="container">
+        <h2 class="section-title"><span class="sec-comment">~</span> <span data-i18n="interests.title">兴趣</span></h2>
+        <div id="interests-list" class="interests-row"></div>
+      </div>
+    </section>
+
+    <!-- ============ 10. Contact ============ -->
+    <section id="contact" class="section">
+      <div class="container">
+        <h2 class="section-title"><span class="sec-comment">&gt;&gt;</span> <span data-i18n="contact.title">联系我</span></h2>
+        <p class="contact-cta" data-i18n="contact.cta">Let's build something reliable.</p>
+        <div class="contact-grid" id="contact-grid"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="footer">
+    <div class="container footer-inner">
+      <p data-i18n="footer.copyright">© 2026 邵锦波 Shao Jinbo</p>
+      <p class="footer-tech" data-i18n="footer.tech">纯静态站 · HTML/CSS/JS + ECharts · 部署于 GitHub Pages</p>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
