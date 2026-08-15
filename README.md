@@ -1,4 +1,4 @@
-# 邵锦波 · 个人简介网站 (Personal Portfolio)
+# cvnices · 个人简介网站 (Personal Portfolio)
 
 个人简介网站源码。审计学本科 + 数据科学硕士在读，聚焦 AI for Finance、可解释 AI、评测体系。
 
